@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Florestal - Engenharia e Soluções Florestais</title>
+    <meta name="description" content="Consultoria especializada em Geoprocessamento e Licenciamento Ambiental. Soluções técnicas e jurídicas para propriedades rurais, empresas e órgãos públicos.">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #09280c;
+            color: #333;
+        }
+        header {
+            background-color: #067204;
+            color: rgb(0, 0, 0);
+            padding: 1rem 0;
+            text-align: center;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        nav ul li {
+            margin: 10px 15px;
+        }
+        nav ul li a {
+            color: rgb(8, 27, 6);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: rgb(100, 200, 107);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        section:last-child {
+            border-bottom: none;
+        }
+        h2 {
+            color: #000000;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+        .service-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .service-item {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .service-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .service-item.popular {
+            border: 2px solid #067204;
+        }
+        .popular-badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: #067204;
+            color: white;
+            padding: 3px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .service-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .service-header img {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+        }
+        .service-header h3 {
+            flex: 1;
+            margin: 0;
+            color: #067204;
+            font-size: 1.3rem;
+        }
+        .service-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #067204;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        .service-toggle:hover {
+            background: #e8f5e9;
+        }
+        .service-basic p {
+            color: #555;
+            margin: 0;
+        }
+        .service-details {
+            padding-top: 15px;
+            margin-top: 15px;
+            border-top: 1px solid #eee;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        .service-details.active {
+            max-height: 500px;
+            padding-top: 15px;
+        }
+        .service-details ul {
+            padding-left: 20px;
+            margin: 15px 0;
+        }
+        .service-details li {
+            margin-bottom: 8px;
+        }
+        .price-estimate {
+            font-style: italic;
+            color: #666;
+            margin: 15px 0;
+        }
+        .service-testimonial {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            font-style: italic;
+        }
+        .client {
+            text-align: right;
+            font-weight: bold;
+            margin-top: 5px;
+            color: #067204;
+        }
+        .request-service {
+            background-color: #128831;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 15px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        .request-service:hover {
+            background-color: #0e6e27;
+        }
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .portfolio-item {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #fff;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer; 
+        }
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+        }
+        .portfolio-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        .portfolio-item .caption {
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            color: #067204;
+        }
+        .hidden {
+            display: none;
+        }
+        .show-more-btn {
+            background-color: #067204;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+            margin: 20px auto;
+            display: block;
+        }
+        .show-more-btn:hover {
+            background-color: #045a03;
+            transform: scale(1.05);
+        }
+        .contact-info {
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        .contact-info p {
+            margin: 10px 0;
+        }
+        form {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fff;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button[type="submit"] {
+            background-color: #128831;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        button[type="submit"]:hover {
+            background-color: #0e6e27;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #000000;
+            color: white;
+            margin-top: 30px;
+            font-size: 0.9rem;
+        }
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 25px;
+            right: 25px;
+            background-color: #00ff1e;
+            border-radius: 50%;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+        .whatsapp-float img {
+            width: 32px;
+            height: 32px;
+        }
+.about-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.about-content img {
+    width: 380px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    flex-shrink: 0;
+}
+
+.about-content p,
+.about-content ul {
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    text-align: justify;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.about-content ul {
+    list-style-type: disc;
+    margin-left: 25px;
+}
+
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about-content img {
+        width: 90%;
+        margin: 0 0 20px 0;
+    }
+
+    .about-content p,
+    .about-content ul {
+        font-size: 0.95rem;
+    }
+}
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 80%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+            text-align: center;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto 20px auto;
+            border-radius: 4px;
+        }
+
+        .modal-content .caption-expanded {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #067204;
+        }
+
+        .modal-content .description-expanded {
+            margin-bottom: 20px;
+            color: #555;
+            text-align: justify;
+        }
+
+        .modal-close {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .modal-close:hover,
+        .modal-close:focus {
+            color: #333;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .about-content {
+                flex-direction: column;
+                align-items: center;
+            }
+            .about-content img {
+                float: none;
+                margin: 0 0 20px 0; 
+                width: 80%;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            .service-list, .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            .modal-content {
+                max-width: 95%;
+                padding: 15px;
+            }
+            .modal-close {
+                top: 5px;
+                right: 15px;
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>Nexus Florestal</h1>
+            <p>Engenharia e Soluções Florestais</p>
+            <nav>
+                <ul>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#portfolio">Portfólio</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        
+<section id="sobre">
+    <h2>Nexus Florestal: Inteligência Ambiental para um Futuro Sustentável</h2>
+    <div class="about-content">
+        <img src="imagens/mapa1.jpg" alt="Equipe EngeFor em campo - Engenharia Ambiental" />
+
+        <p>A <strong>Nexus Florestal</strong> é uma consultoria especializada em <strong>geoprocessamento</strong> e <strong>licenciamento ambiental</strong>, que alia tecnologia, precisão técnica e domínio da <strong>legislação brasileira</strong> para transformar desafios ambientais em soluções estratégicas.</p>
+
+        <p>Atendemos <strong>proprietários rurais, empresas e órgãos públicos</strong> com soluções personalizadas e eficientes, sempre com foco em segurança jurídica e sustentabilidade.</p>
+
+        <ul>
+            <li><strong>Documentação precisa:</strong> baseada em dados geoespaciais confiáveis.</li>
+            <li><strong>Agilidade processual:</strong> facilitando trâmites junto aos órgãos ambientais.</li>
+            <li><strong>Segurança jurídica:</strong> respaldo técnico para decisões e regularizações.</li>
+            <li><strong>Inteligência territorial:</strong> interpretação de dados para planejamento eficaz.</li>
+        </ul>
+
+        <p>Com a Nexus Florestal, você conta com um parceiro técnico confiável para navegar a complexidade ambiental com estratégia e visão de futuro.</p>
+    </div>
+</section>
+
+
+        <section id="servicos">
+            <h2>Principais Serviços</h2>
+            <p class="section-subtitle">Soluções completas para gestão ambiental e florestal</p>
+
+                <div class="service-item">
+                    <div class="service-header">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3348/3348340.png" alt="Inventário" width="40">
+                        <h3>Inventário Florestal e CAR</h3>
+                        <button class="service-toggle">+</button>
+                    </div>
+                    <div class="service-basic">
+                        <p>Levantamento detalhado dos recursos florestais e regularização ambiental de propriedades rurais.</p>
+                    </div>
+                    <div class="service-details">
+                        <ul>
+                            <li>Elaboração e retificação de CAR (Cadastro Ambiental Rural)</li>
+                            <li>Inventário florestal 100% digital</li>
+                            <li>Georreferenciamento de áreas</li>
+                            <li>Identificação de APPs e Reserva Legal</li>
+                            <li>Regularização junto ao SICAR</li>
+                        </ul>
+                        <p class="price-estimate">Tempo médio: 1-3 meses</p>
+                        <button class="request-service" onclick="scrollToContact('Inventário Florestal e CAR')">Solicitar Serviço</button>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio">
+            <h2>Nosso Trabalho</h2>
+            <p>Clique nas imagens para ver mais detalhes e solicitar o serviço correspondente.</p>
+            <div class="portfolio-grid">
+                <div class="portfolio-item" 
+                     data-full-img="imagens/mapa1.jpg" 
+                     data-caption="Análise de Cobertura Vegetal (MapBiomas)"
+                     data-description="Este mapa detalha o uso e a cobertura do solo em diferentes períodos, utilizando dados da coleção MapBiomas. Essencial para planejamento agrícola, ambiental e identificação de áreas de preservação ou desmatamento.">
+                    <img src="imagens/mapa1.jpg" alt="Mapa de Cobertura Vegetal - Análise MapBiomas">
+                    <div class="caption">Análise de Cobertura Vegetal (MapBiomas)</div>
+                </div>
+                <div class="portfolio-item" 
+                     data-full-img="imagens/mapa2.jpg" 
+                     data-caption="Bacias Hidrográficas e Áreas de Preservação"
+                     data-description="Mapeamento de bacias hidrográficas com identificação de áreas de preservação permanente (APPs) e monitoramento de desmatamento através de dados do DETER/PRODES. Fundamental para gestão hídrica e conservação.">
+                    <img src="imagens/mapa2.jpg" alt="Mapa de Bacias Hidrográficas - Monitoramento DETER">
+                    <div class="caption">Bacias Hidrográficas e Áreas de Preservação</div>
+                </div>
+                <div class="portfolio-item" 
+                     data-full-img="imagens/mapa3.jpg" 
+                     data-caption="Delimitação Técnica de Áreas Protegidas"
+                     data-description="Levantamento de campo e mapeamento preciso para delimitação de Áreas de Preservação Permanente (APPs) e outras áreas protegidas. Garante a conformidade legal e o correto manejo ambiental da propriedade.">
+                    <img src="imagens/mapa3.jpg" alt="Levantamento de Campo - Delimitação Técnica">
+                    <div class="caption">Delimitação Técnica de Áreas Protegidas</div>
+                </div>
+                <div class="portfolio-item" 
+                     data-full-img="imagens/mapa4.jpg" 
+                     data-caption="Classificação de Uso e Ocupação do Solo"
+                     data-description="Análise detalhada do uso e ocupação do solo por meio de técnicas de classificação supervisionada. Permite a identificação de diferentes classes (agricultura, pastagem, floresta) e o planejamento estratégico do território.">
+                    <img src="imagens/mapa4.jpg" alt="Mapa de Uso do Solo - Classificação Supervisionada">
+                    <div class="caption">Classificação de Uso e Ocupação do Solo</div>
+                </div>
+                <div class="portfolio-item" 
+                     data-full-img="imagens/mapa5.jpg" 
+                     data-caption="Análise de Declividade e Aptidão Agrícola"
+                     data-description="Mapeamento e análise de declividade do terreno, essencial para planejamento agrícola e identificação de áreas de risco para erosão. Auxilia na tomada de decisões sobre o uso mais adequado da terra.">
+                    <img src="imagens/mapa5.jpg" alt="Mapa de Declividade - Análise Topográfica">
+                    <div class="caption">Análise de Declividade e Aptidão Agrícola</div>
+                </div>
+                <div class="portfolio-item" 
+                     data-full-img="imagens/mapa6.jpg" 
+                     data-caption="Diagnóstico de Áreas Degradadas"
+                     data-description="Identificação e mapeamento de áreas degradadas, servindo como base para projetos de recuperação ambiental. Essencial para proprietários que buscam restaurar a produtividade e a saúde ecológica de suas terras.">
+                    <img src="imagens/mapa6.jpg" alt="Mapa de Áreas Degradadas - Processo de Recuperação">
+                    <div class="caption">Diagnóstico de Áreas Degradadas</div>
+                </div>
+                
+                <div class="portfolio-item hidden" 
+                     data-full-img="imagens/mapa7.jpg" 
+                     data-caption="Projeto de Reserva Legal"
+                     data-description="Elaboração de projetos para adequação e regularização de áreas de Reserva Legal, conforme as exigências do Código Florestal. Garante a conformidade legal da propriedade rural.">
+                    <img src="imagens/mapa7.jpg" alt="Mapa de Reserva Legal - Adequação Ambiental">
+                    <div class="caption">Projeto de Reserva Legal</div>
+                </div>
+                <div class="portfolio-item hidden" 
+                     data-full-img="imagens/mapa8.jpg" 
+                     data-caption="Delimitação de Áreas de Preservação Permanente"
+                     data-description="Serviço especializado na delimitação exata de Áreas de Preservação Permanente (APPs) em propriedades, crucial para o cumprimento das normas ambientais e prevenção de multas.">
+                    <img src="imagens/mapa8.jpg" alt="Mapa de APP - Delimitação de Margens">
+                    <div class="caption">Delimitação de Áreas de Preservação Permanente</div>
+                </div>
+                <div class="portfolio-item hidden" 
+                     data-full-img="imagens/mapa9.jpg" 
+                     data-caption="Zoneamento Ambiental para Licenciamento"
+                     data-description="Criação de mapas de zoneamento ambiental para auxiliar processos de licenciamento, indicando áreas de restrição, uso permitido e áreas de intervenção, otimizando o processo.">
+                    <img src="imagens/mapa9.jpg" alt="Mapa de Zoneamento Ambiental">
+                    <div class="caption">Zoneamento Ambiental para Licenciamento</div>
+                </div>
+                <div class="portfolio-item hidden" 
+                     data-full-img="imagens/mapa10.jpg" 
+                     data-caption="Inventário Florestal por Sensoriamento Remoto"
+                     data-description="Realização de inventários florestais utilizando técnicas de sensoriamento remoto, oferecendo dados precisos sobre a composição e volume da vegetação de forma rápida e eficiente.">
+                    <img src="imagens/mapa10.jpg" alt="Mapa de Vegetação Nativa - Inventário Florestal">
+                    <div class="caption">Inventário Florestal por Sensoriamento Remoto</div>
+                </div>
+                <div class="portfolio-item hidden" 
+                     data-full-img="imagens/mapa11.jpg" 
+                     data-caption="Identificação de Áreas de Risco de Erosão"
+                     data-description="Mapeamento e análise para identificar áreas com alto risco de erosão, permitindo a implementação de medidas preventivas e de recuperação do solo para evitar perdas e danos ambientais.">
+                    <img src="imagens/mapa11.jpg" alt="Mapa de Áreas de Risco - Prevenção de Erosão">
+                    <div class="caption">Identificação de Áreas de Risco de Erosão</div>
+                </div>
+                <div class="portfolio-item hidden" 
+                     data-full-img="imagens/mapa12.jpg" 
+                     data-caption="Análise de Rede de Drenagem"
+                     data-description="Estudo detalhado da rede de drenagem de uma área, essencial para o planejamento de recursos hídricos, projetos de irrigação, drenagem e licenciamento de obras que interfiram em cursos d'água.">
+                    <img src="imagens/mapa12.jpg" alt="Mapa de Hidrografia - Análise de Drenagem">
+                    <div class="caption">Análise de Rede de Drenagem</div>
+                </div>
+                <div class="portfolio-item hidden" 
+                     data-full-img="imagens/mapa13.jpg" 
+                     data-caption="Monitoramento de Desmatamento (Série Histórica)"
+                     data-description="Análise do desmatamento ao longo do tempo, utilizando séries históricas de imagens de satélite. Fornece dados cruciais para monitoramento ambiental, fiscalização e elaboração de planos de recuperação.">
+                    <img src="imagens/mapa13.jpg" alt="Mapa de Desmatamento - Série Histórica">
+                    <div class="caption">Monitoramento de Desmatamento (Série Histórica)</div>
+                </div>
+                <div class="portfolio-item hidden" 
+                     data-full-img="imagens/mapa14.jpg" 
+                     data-caption="Evolução do Uso do Solo (2000-2023)"
+                     data-description="Comparativo temporal da evolução do uso e ocupação do solo entre 2000 e 2023. Permite visualizar mudanças na paisagem, identificar tendências e subsidiar o planejamento futuro.">
+                    <img src="imagens/mapa14.jpg" alt="Mapa de Uso do Solo - Comparativo Temporal">
+                    <div class="caption">Evolução do Uso do Solo (2000-2023)</div>
+                </div>
+                <div class="portfolio-item hidden" 
+                     data-full-img="imagens/mapa15.jpg" 
+                     data-caption="Zoneamento Ecológico-Econômico"
+                     data-description="Desenvolvimento de zoneamentos ecológicos-econômicos (ZEE), ferramentas de planejamento que buscam conciliar o desenvolvimento econômico com a conservação ambiental, otimizando o uso dos recursos naturais.">
+                    <img src="imagens/mapa15.jpg" alt="Mapa de Aptidão Agrícola - Zoneamento Ecológico">
+                    <div class="caption">Zoneamento Ecológico-Econômico</div>
+                </div>
+            </div>
+            
+            <button id="showMoreBtn" class="show-more-btn">Mostrar Mais Trabalhos</button>
+            
+            <p style="text-align: center; margin-top: 30px;">
+                Para mais estudos de caso, entre em contato conosco.
+            </p>
+        </section>
+
+        <section id="contato">
+            <h2>Fale Conosco</h2>
+            <p class="contact-info">
+                Entre em contato para orçamento ou dúvidas. Retornaremos o mais breve possível.
+            </p>
+            <div class="contact-info">
+                <p><strong>Telefone:</strong> (66) 9 9204-0604</p>
+                <p><strong>E-mail:</strong> connectinform360@gmail.com</p>
+                <p><strong>Endereço:</strong> Brasil</p>
+                <p>Ou preencha o formulário abaixo:</p>
+                <form id="contactForm" action="#" method="POST" aria-label="Formulário de contato">
+                    <input type="hidden" id="serviceInterest" name="serviceInterest" value="">
+                    
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome" required>
+                    
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" name="email" required>
+                    
+                    <label for="telefone">Telefone ou WhatsApp:</label>
+                    <input type="tel" id="telefone" name="telefone">
+                    
+                    <label for="mensagem">Mensagem:</label>
+                    <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
+                    
+                    <button type="submit" aria-label="Enviar mensagem de contato">Enviar Mensagem</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+             <p>&copy; 2025 - Nexus Florestal | <span class="highlight">NexusFlorestal.com.br</span></p>
+        <p>by <a href="https://henriquecassisdev.com" class="email-link" target="_blank" rel="noopener noreferrer">HenriqueCassisDev.Com</a></p>
+    </footer>
+
+    <a href="https://wa.me/5566992040604?text=Olá,%20tenho%20interesse%20em%20consultoria%20ambiental!" 
+        class="whatsapp-float" 
+        target="_blank" 
+        aria-label="Fale pelo WhatsApp">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" />
+    </a>
+
+    <div id="imageModal" class="image-modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <img id="modalImage" src="" alt="Imagem Expandida">
+            <div id="modalCaption" class="caption-expanded"></div>
+            <p id="modalDescription" class="description-expanded"></p>
+            <button class="request-service" id="modalRequestServiceBtn">Solicitar Serviço sobre este Mapa</button>
+        </div>
+    </div>
+
+    <script>
+        // expandir/recolher detalhes do serviço
+        document.querySelectorAll('.service-toggle').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const serviceItem = this.closest('.service-item');
+                const details = serviceItem.querySelector('.service-details');
+                details.classList.toggle('active');
+                this.textContent = details.classList.contains('active') ? '-' : '+';
+            });
+        });
+
+        // rolar até o formulário de contato
+        function scrollToContact(serviceName) {
+        
+            document.getElementById('serviceInterest').value = serviceName;
+    
+            document.getElementById('contato').scrollIntoView({
+                behavior: 'smooth'
+            });
+
+            const messageField = document.getElementById('mensagem');
+            messageField.focus();
+            messageField.value = `Gostaria de solicitar informações sobre: ${serviceName}\n\n`;
+
+            const imageModal = document.getElementById('imageModal');
+            if (imageModal.style.display === 'flex') {
+                imageModal.style.display = 'none';
+            }
+        }
+
+        // botão "Mostrar Mais" no portfólio
+        document.getElementById('showMoreBtn').addEventListener('click', function() {
+            const hiddenItems = document.querySelectorAll('.portfolio-item.hidden');
+            const btn = this;
+            
+            // mostrar 3 itens ocultos a cada clique
+            let shownCount = 0;
+            hiddenItems.forEach(item => {
+                if (shownCount < 3) { 
+                    item.classList.remove('hidden');
+                    shownCount++;
+                }
+            });
+            
+            // esconde o botão
+            if (document.querySelectorAll('.portfolio-item.hidden').length === 0) {
+                btn.style.display = 'none';
+            }
+            
+            // rolagem
+            if (shownCount > 0) {
+                hiddenItems[0].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        });
+
+        // Lógica do Modal de Imagem
+        const imageModal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalCaption = document.getElementById('modalCaption');
+        const modalDescription = document.getElementById('modalDescription');
+        const modalRequestServiceBtn = document.getElementById('modalRequestServiceBtn');
+        const modalClose = document.getElementsByClassName('modal-close')[0];
+
+        document.querySelectorAll('.portfolio-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const fullImgSrc = this.dataset.fullImg;
+                const captionText = this.dataset.caption;
+                const descriptionText = this.dataset.description;
+
+                modalImage.src = fullImgSrc;
+                modalCaption.textContent = captionText;
+                modalDescription.textContent = descriptionText;
+                modalRequestServiceBtn.textContent = `Solicitar Serviço sobre: ${captionText}`;
+                modalRequestServiceBtn.onclick = () => scrollToContact(captionText);
+
+                imageModal.style.display = 'flex';
+            });
+        });
+
+        modalClose.addEventListener('click', function() {
+            imageModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', function(event) {
+            if (event.target == imageModal) {
+                imageModal.style.display = 'none';
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.service-details').forEach(details => {
+                details.classList.remove('active');
+            });
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+            portfolioItems.forEach((item, index) => {
+                if (index >= 6) {
+                    item.classList.add('hidden');
+                }
+            });
+            if (document.querySelectorAll('.portfolio-item.hidden').length === 0) {
+                document.getElementById('showMoreBtn').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
